@@ -13,3 +13,5 @@
 - 소스를 다운 받은 후에 설치된 비주얼 스튜디오 맞게 배치 파일을 실행합니다. 
 - 배치 파일을 실행하면 Project폴더가 생성되고 해당 폴더 내에 솔루션 파일이 생성됩니다. 
 - 솔루션을 더블클릭해 비주얼 스튜디오를 열고 컴파일한 후 실행하면 됩니다.
+
+- https://www.notion.so/jeongminju/CODE-GIF-cd4ab8769984499caa976d7c5c3cc600 Transform.cpp GetModelingMatirx, CalculateLocalAxis 구현 예시 코드 & GIF파일
