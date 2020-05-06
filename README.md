@@ -14,7 +14,9 @@
 - 배치 파일을 실행하면 Project폴더가 생성되고 해당 폴더 내에 솔루션 파일이 생성됩니다. 
 - 솔루션을 더블클릭해 비주얼 스튜디오를 열고 컴파일한 후 실행하면 됩니다.
 
-- https://www.notion.so/jeongminju/CODE-GIF-cd4ab8769984499caa976d7c5c3cc600 Transform.cpp GetModelingMatirx, CalculateLocalAxis 구현 예시 코드 & GIF파일
+- https://www.notion.so/jeongminju/CODE-GIF-cd4ab8769984499caa976d7c5c3cc600 Transform.cpp Add fuc GetModelingMatirx, CalculateLocalAxis 구현 예시 코드 & GIF 파일
+
+- https://www.notion.so/jeongminju/Cohen-Sutherland-GIF-a78978130e144b279a1d74cbdc9d5a2f WindowsRSI.cpp Add fuc TestRegion, CohenSutherlandLineClip 구현 예시 코드 & GIF 파일
 
 SCREENSHOT
 
