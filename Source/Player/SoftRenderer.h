@@ -52,8 +52,8 @@ private:
 	void DrawGrid2D();
 
 	int _Grid2DUnit = 10;
-	Matrix2x2 _DeltaTransform = Matrix2x2::Identity;
-	Vector2 _CurrentPosition = Vector2::Zero;
+	Vector2 _StartPosition = Vector2::Zero;
+	Vector2 _EndPosition = Vector2(500.f, 0.f);
 	LinearColor _CurrentColor = LinearColor::Blue;
 
 private:
@@ -63,9 +63,6 @@ private:
 	bool _GameEngineInitialized = false;
 	bool _TickFunctionBound = false;
 	bool _AllInitialized = false;
-
-	Transform _transform;
-
 
 	// 화면 크기
 	ScreenPoint _ScreenSize;

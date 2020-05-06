@@ -102,6 +102,5 @@ struct Math
 			OutCos = cosf(rad);
 		}
 	}
-
-	
 };
+

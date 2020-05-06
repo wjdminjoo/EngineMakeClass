@@ -11,7 +11,7 @@ Matrix3x3 Transform::GetModelingMatrix() const
 						   Vector3(Vector2(-sinTheta, cosTheta), false), 
 						   Vector3::UnitZ);
 
-	Matrix3x3 scaleMatrix(Vector3::UnitX * Scale._X, Vector3::UnitY * Scale._Y, Vector3::UnitZ);
+	Matrix3x3 scaleMatrix(Vector3::UnitX * Scale.X, Vector3::UnitY * Scale.Y, Vector3::UnitZ);
 
 	return  translateMatrix * rotateMatrix * scaleMatrix;
 
