@@ -15,3 +15,15 @@
 - 솔루션을 더블클릭해 비주얼 스튜디오를 열고 컴파일한 후 실행하면 됩니다.
 
 - https://www.notion.so/jeongminju/CODE-GIF-cd4ab8769984499caa976d7c5c3cc600 Transform.cpp GetModelingMatirx, CalculateLocalAxis 구현 예시 코드 & GIF파일
+
+SCREENSHOT
+
+-----------------------------------------------------------------------------------------------------------
+ADD LINE CLIPPING
+![3](https://user-images.githubusercontent.com/43086720/81179906-48ce8c00-8fe5-11ea-9508-66abc2c50615.gif)
+
+-----------------------------------------------------------------------------------------------------------
+ADD TRANSEFORM
+![1](https://user-images.githubusercontent.com/43086720/81069805-5caebb00-8f1d-11ea-9adc-292800fbbfc7.gif)
+
+-----------------------------------------------------------------------------------------------------------
