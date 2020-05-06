@@ -78,7 +78,7 @@ void WindowsRSI::DrawLine(const Vector2& InStartPos, const Vector2& InEndPos, co
 	ScreenPoint startPosition = ScreenPoint::ToScreenCoordinate(_ScreenSize, clippedStart);
 	ScreenPoint endPosition = ScreenPoint::ToScreenCoordinate(_ScreenSize, clippedEnd);
 
-	PushStatisticText(clippedEnd.ToString());
+	PushStatisticText("Clipping Pos" + clippedEnd.ToString());
 
 	int width = endPosition.X - startPosition.X;
 	int height = endPosition.Y - startPosition.Y;

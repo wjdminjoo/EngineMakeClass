@@ -64,8 +64,8 @@ void SoftRenderer::Render2D()
 	_RSI->DrawLine(_StartPosition, _EndPosition, _CurrentColor);
 
 	// 선의 시작과 끝 지점을 화면에 출력
-	_RSI->PushStatisticText(_StartPosition.ToString());
-	_RSI->PushStatisticText(_EndPosition.ToString());
+	_RSI->PushStatisticText("StartPos" + _StartPosition.ToString());
+	_RSI->PushStatisticText("EndPos" + _EndPosition.ToString());
 
 
 }
