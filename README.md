@@ -1,15 +1,13 @@
 # SoftRenderer
 
-교육적 목적으로 고안된 프로젝트입니다. 
-브랜치를 사용해 단계별로 코드가 구현되어 있으니 수업에 참고하시기 바랍니다. 
------------------------------------------------------------------------------------------------------------
-
 [요구사항]
 - 비주얼 스튜디오 2017/2019 커뮤니티 버젼
 - CMake 3.1버젼 이상 ( https://cmake.org/download/ )
 
 본 프로젝트는 멀티플랫폼으로 설계되어 있으나 현재는 윈도우만 지원합니다. 
+
 -----------------------------------------------------------------------------------------------------------
+
 
 [사용방법]
 - 소스를 다운 받은 후에 설치된 비주얼 스튜디오 맞게 배치 파일을 실행합니다. 
@@ -20,6 +18,9 @@
 
 [추가 내역]
 
+- https://www.notion.so/jeongminju/3a83946ecdb2431ba559274dcb02d663?v=b912d05bee814be091ba32c12e8f6b87 SoftRender2D.cpp Add Mesh.h, Mesh.cpp, Camera.h, Camera.cpp 구현 예시 코드 & GIF 파일
+
+
 - https://www.notion.so/jeongminju/Cohen-Sutherland-GIF-a78978130e144b279a1d74cbdc9d5a2f WindowsRSI.cpp Add fuc TestRegion, CohenSutherlandLineClip 구현 예시 코드 & GIF 파일
 
 
@@ -28,7 +29,11 @@
 -----------------------------------------------------------------------------------------------------------
 
 
-SCREENSHOT
+[SCREENSHOT]
+
+ADD CAMERA & OBJECTS
+![2](https://user-images.githubusercontent.com/43086720/82487853-e95e9900-9b19-11ea-8824-1e5b5449855d.gif)
+-----------------------------------------------------------------------------------------------------------
 
 ADD LINE CLIPPING
 ![3](https://user-images.githubusercontent.com/43086720/81183632-5a666280-8fea-11ea-9578-acadfaa35aaf.gif)
@@ -36,4 +41,5 @@ ADD LINE CLIPPING
 
 ADD TRANSEFORM
 ![1](https://user-images.githubusercontent.com/43086720/81069805-5caebb00-8f1d-11ea-9adc-292800fbbfc7.gif)
+-----------------------------------------------------------------------------------------------------------
 
