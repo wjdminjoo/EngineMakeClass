@@ -11,6 +11,7 @@ public:
 	FORCEINLINE explicit ScreenPoint(const Vector2& InPos) : ScreenPoint(InPos.X, InPos.Y) {}
 
 	ScreenPoint GetHalf() { return ScreenPoint(Math::FloorToInt(0.5f * X), Math::FloorToInt(0.5f * Y)); }
+	ScreenPoint GetScreenSize() { return ScreenPoint(X, Y); }
 	FORCEINLINE bool HasZero() const { return ( X == 0 || Y == 0 ); }
 
 	FORCEINLINE static ScreenPoint ToScreenCoordinate(const ScreenPoint& InScreenSize, const Vector2& InPos)

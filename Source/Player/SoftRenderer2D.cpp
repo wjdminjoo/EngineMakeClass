@@ -52,6 +52,10 @@ void SoftRenderer::Update2D(float InDeltaSeconds)
 
 void SoftRenderer::Render2D()
 {
+
+	size_t total = _GameEngine.GetObject().size();
+	size_t culling = 0;
+	size_t renderObject = 0;
 	// 격자 그리기
 	DrawGrid2D();
 
@@ -60,6 +64,9 @@ void SoftRenderer::Render2D()
 	Matrix3x3 finalMat;
 	auto& object = _GameEngine.GetObject();
 
+	const auto& playerOjbect = _GameEngine.GameObjectFinder("Player");
+	_RSI->PushStatisticText("Total : " + std::to_string(total));
+	
 	for (int i = 0; i < object.size(); i++) {
 		Transform2D& objectTransform = object[i]->GetTransform();
 
@@ -76,6 +83,18 @@ void SoftRenderer::Render2D()
 		std::memcpy(indices, &objectMesh->_Indices[0], sizeof(int) * indexCount);
 
 		finalMat = viewMatrix * objectTransform.GetModelingMatrix();
+		const Circle& cameraBound = _GameEngine.GetCamera()->GetCircleBound();
+
+		Circle gameObjectBound(playerOjbect->GetMesh()->GetCircleBound());
+
+		gameObjectBound.Center = finalMat * gameObjectBound.Center;
+		gameObjectBound.Radius = gameObjectBound.Radius * playerOjbect->GetTransform().GetScale().Max();
+
+		
+		if (!cameraBound.Intersect(gameObjectBound)) {
+			culling++;
+			continue;
+		}
 
 		for (int vi = 0; vi < vertexCount; ++vi)
 		{
@@ -93,5 +112,10 @@ void SoftRenderer::Render2D()
 		delete[] vertices;
 		delete[] indices;
 	}
+
+	_RSI->PushStatisticText("culling : " + std::to_string(culling));
+	int sum = total - culling;
+	_RSI->PushStatisticText("renderObject : " + std::to_string(sum));
+
 }
 

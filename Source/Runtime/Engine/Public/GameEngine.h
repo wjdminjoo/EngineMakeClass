@@ -7,7 +7,7 @@ class GameEngine
 public:
 	GameEngine() = default;
 
-	bool Init();
+	bool Init(const ScreenPoint& view);
 	bool LoadScene();
 	bool LoadResource();
 
@@ -25,4 +25,6 @@ private:
 	std::vector<std::unique_ptr<GameObject2D>> _Object;
 
 	InputManager _InputManager;
+
+	ScreenPoint _ViewPortSize;
 };

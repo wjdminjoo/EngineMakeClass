@@ -4,8 +4,10 @@
 #include "Transform2D.h"
 #include "GameObject2D.h"
 #include "Camera2D.h"
+#include "Mesh.h"
+#include <random>
 #include "GameEngine.h"
-bool GameEngine::Init()
+bool GameEngine::Init(const ScreenPoint& view)
 {
 	if (!_InputManager.GetXAxis || !_InputManager.GetYAxis || !_InputManager.SpacePressed)
 	{
@@ -22,26 +24,30 @@ bool GameEngine::Init()
 		return false;
 	}
 
+	_ViewPortSize = view;
+
 	return true;
 }
 
 bool GameEngine::LoadScene()
 {
-	static float initScale = 100.0f;
+	static float initScale = 10.0f;
+	std::mt19937 rand(0);
+	std::uniform_real_distribution<float> dis(-500.0f, 500.0f);
 
-	for (int i = -10; i < 10; i++) {
-		for (int j = -10; j < 10; j++) {
-			_Object.push_back(std::make_unique<GameObject2D>("Object", _QuadMesh["QuadMesh"].get()));
-			_Object[_Object.size() - 1]->GetTransform().SetScale(Vector2::One * initScale);
-			_Object[_Object.size() - 1]->GetTransform().SetPosition(Vector2(initScale, j * initScale + 100));
-		}
-		_Object[_Object.size() - 1]->GetTransform().SetPosition(Vector2(i * initScale + 100, initScale));
+
+	for (int j = 0; j < 10000; j++) {
+		_Object.push_back(std::make_unique<GameObject2D>("Object", _QuadMesh["QuadMesh"].get()));
+		_Object[_Object.size() - 1]->GetTransform().SetScale(Vector2::One * initScale);
+		_Object[_Object.size() - 1]->GetTransform().SetPosition(Vector2(dis(rand), dis(rand)));
 	}
 	_Object.push_back(std::make_unique<GameObject2D>("Player", _QuadMesh["QuadMesh"].get()));
 	_Object[_Object.size() - 1]->GetTransform().SetScale(Vector2::One * initScale);
-	
-	_Camera = std::make_unique<Camera2D>();
 
+
+	_Camera = std::make_unique<Camera2D>();
+	//_Camera->SetCameraViewSize();
+	_Camera->SetCameraCircleBound(100.0f);
 	return true;
 }
 
@@ -66,6 +72,7 @@ bool GameEngine::LoadResource()
 		0, 3, 2
 	};
 
+	_QuadMesh["QuadMesh"]->CalcuBound();
 
 	return true;
 }
@@ -73,7 +80,7 @@ bool GameEngine::LoadResource()
 GameObject2D* GameEngine::GameObjectFinder(std::string name)
 {
 	for (int i = 0; i < _Object.size(); i++) {
-		if (name ==  _Object[i].get()->GetName()) {
+		if (name == _Object[i].get()->GetName()) {
 			return _Object[i].get();
 		}
 	}
