@@ -31,9 +31,10 @@ bool GameEngine::Init(const ScreenPoint& view)
 
 bool GameEngine::LoadScene()
 {
+	_ViewPortSize;
 	static float initScale = 10.0f;
 	std::mt19937 rand(0);
-	std::uniform_real_distribution<float> dis(-500.0f, 500.0f);
+	std::uniform_real_distribution<float> dis(-10000.0f, 10000.0f);
 
 
 	for (int j = 0; j < 10000; j++) {
@@ -46,8 +47,7 @@ bool GameEngine::LoadScene()
 
 
 	_Camera = std::make_unique<Camera2D>();
-	//_Camera->SetCameraViewSize();
-	_Camera->SetCameraCircleBound(100.0f);
+	_Camera->SetCameraViewSize(_ViewPortSize);
 	return true;
 }
 
@@ -88,3 +88,17 @@ GameObject2D* GameEngine::GameObjectFinder(std::string name)
 	return NULL;
 }
 
+void GameEngine::SetQuadTree(Rectangle& rect, std::vector<GameObject2D*> object) {
+	_Quadtree = std::make_unique<QuadTree>(rect);
+
+	Rectangle rectangle = rect;
+	for (int i = 0; i < object.size(); i++) {
+		rectangle.Min *= object[i]->GetTransform().GetScale().Max();
+		rectangle.Max *= object[i]->GetTransform().GetScale().Max();
+		rectangle.Min += object[i]->GetTransform().GetPosition();
+		rectangle.Max += object[i]->GetTransform().GetPosition();
+		
+		_Quadtree->Insert(rectangle, object[i]);
+	}
+
+}

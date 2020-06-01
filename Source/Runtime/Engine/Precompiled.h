@@ -6,3 +6,5 @@
 #include "Mesh.h"
 #include "GameObject2D.h"
 #include "Camera2D.h"
+#include "QuadTree.h"
+#include "QuadTree.h"

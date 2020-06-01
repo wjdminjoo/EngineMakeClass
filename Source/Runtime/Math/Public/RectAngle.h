@@ -8,7 +8,8 @@ struct Rectangle
 public:
 	Rectangle() = default;
 	Rectangle(const Rectangle& InBox) : Min(InBox.Min), Max(InBox.Max) { }
-	Rectangle(const Vector2& InMinVector, const Vector2& InMaxVector) : Min(InMinVector), Max(InMaxVector) { }
+	Rectangle(const Vector2& InMinVector, const Vector2& InMaxVector) 
+		: Min(InMinVector), Max(InMaxVector) { }
 	Rectangle(const Vector2* InVertices, size_t InCount);
 
 	FORCEINLINE bool Intersect(const Rectangle& InBox) const;
@@ -23,14 +24,14 @@ public:
 	FORCEINLINE void GetCenterAndExtent(Vector2& OutCenter, Vector2& OutExtent) const;
 
 public:
-	Vector2 Min;
-	Vector2 Max;
+	Vector2 Min = Vector2(-400, -300);
+	Vector2 Max = Vector2(400, 300);
 };
 
 inline Rectangle::Rectangle(const Vector2* InVertices, size_t InCount)
 {
-	Vector2 min;
-	Vector2 max;
+	Vector2 min = Vector2::Zero;;
+	Vector2 max = Vector2::Zero;;
 	if (InVertices != 0)
 		return;
 	if (InCount != 0)
@@ -55,7 +56,7 @@ inline Rectangle::Rectangle(const Vector2* InVertices, size_t InCount)
 
 FORCEINLINE bool Rectangle::Intersect(const Rectangle& InBox) const
 {
-	if ((Min.X > InBox.Max.X) || (InBox.Min.X > Max.X))
+	if ((Min.X > InBox.Max.X) || (InBox.Min.X > Max.X)) // InBox에 NULL값이 들어옴
 	{
 		return false;
 	}

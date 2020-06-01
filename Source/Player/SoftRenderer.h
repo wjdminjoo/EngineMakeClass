@@ -79,8 +79,15 @@ private:
 
 	// 렌더러 인터페이스
 	std::unique_ptr<RenderingSoftwareInterface> _RSI;
-
 	float _MoveSpeed = 100.0f;
+
 	// 게임 엔진
 	GameEngine _GameEngine;
+
+	//QUADTREE
+	//std::vector<GameObject2D*> quadTree;
+
+
+	bool isCheckQuadTree;
+	bool first = true;
 };
