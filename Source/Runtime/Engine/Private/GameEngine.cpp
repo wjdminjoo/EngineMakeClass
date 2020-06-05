@@ -1,12 +1,11 @@
-
 #include "Precompiled.h"
 #include "Mesh.h"
 #include "Transform2D.h"
 #include "GameObject2D.h"
 #include "Camera2D.h"
 #include "Mesh.h"
-#include <random>
 #include "GameEngine.h"
+
 bool GameEngine::Init(const ScreenPoint& view)
 {
 	if (!_InputManager.GetXAxis || !_InputManager.GetYAxis || !_InputManager.SpacePressed)
@@ -31,20 +30,22 @@ bool GameEngine::Init(const ScreenPoint& view)
 
 bool GameEngine::LoadScene()
 {
-	_ViewPortSize;
-	static float initScale = 10.0f;
-	std::mt19937 rand(0);
-	std::uniform_real_distribution<float> dis(-10000.0f, 10000.0f);
-
-
-	for (int j = 0; j < 10000; j++) {
-		_Object.push_back(std::make_unique<GameObject2D>("Object", _QuadMesh["QuadMesh"].get()));
-		_Object[_Object.size() - 1]->GetTransform().SetScale(Vector2::One * initScale);
-		_Object[_Object.size() - 1]->GetTransform().SetPosition(Vector2(dis(rand), dis(rand)));
-	}
 	_Object.push_back(std::make_unique<GameObject2D>("Player", _QuadMesh["QuadMesh"].get()));
-	_Object[_Object.size() - 1]->GetTransform().SetScale(Vector2::One * initScale);
+	_Object.push_back(std::make_unique<GameObject2D>("Child", _QuadMesh["QuadMesh"].get()));
+	_Object.push_back(std::make_unique<GameObject2D>("ChildTwo", _QuadMesh["QuadMesh"].get()));
 
+	_Object[0]->GetTransform().SetLocalScale(Vector2::One * 100);
+
+	_Object[1]->GetTransform().SetLocalScale(Vector2::One * 50);
+	_Object[1]->GetTransform().SetLocalPosition(Vector2(350, 0));
+
+	_Object[2]->GetTransform().SetLocalScale(Vector2::One * 10);
+	_Object[2]->GetTransform().SetLocalPosition(Vector2(6000, 0));
+
+	// 분명 Child에 넣는데 Player의 주소를 갖고있는다..
+	_Object[1]->GetTransform().SetParent(&_Object[0]->GetTransform());
+	_Object[2]->GetTransform().SetParent(&_Object[1]->GetTransform());
+	
 
 	_Camera = std::make_unique<Camera2D>();
 	_Camera->SetCameraViewSize(_ViewPortSize);
@@ -93,10 +94,10 @@ void GameEngine::SetQuadTree(Rectangle& rect, std::vector<GameObject2D*> object)
 
 	Rectangle rectangle = rect;
 	for (int i = 0; i < object.size(); i++) {
-		rectangle.Min *= object[i]->GetTransform().GetScale().Max();
-		rectangle.Max *= object[i]->GetTransform().GetScale().Max();
-		rectangle.Min += object[i]->GetTransform().GetPosition();
-		rectangle.Max += object[i]->GetTransform().GetPosition();
+		rectangle.Min *= object[i]->GetTransform().GetLocalScale().Max();
+		rectangle.Max *= object[i]->GetTransform().GetLocalScale().Max();
+		rectangle.Min += object[i]->GetTransform().GetLocalScale();
+		rectangle.Max += object[i]->GetTransform().GetLocalScale();
 		
 		_Quadtree->Insert(rectangle, object[i]);
 	}

@@ -141,6 +141,11 @@ void WindowsRSI::PushStatisticText(std::string && InText)
 	_StatisticTexts.emplace_back(InText);
 }
 
+void WindowsRSI::PushStatisticTextLine(std::string&& InText)
+{
+	_StatisticTexts.emplace_back("--------------------------------------------" + InText);
+}
+
 void WindowsRSI::PushStatisticTexts(std::vector<std::string> && InTexts)
 {
 	std::move(InTexts.begin(), InTexts.end(), std::back_inserter(_StatisticTexts));

@@ -7,7 +7,7 @@
 Matrix3x3 Camera2D::GetViewMatrix() const
 {
 	// transform ¿ªÇà·Ä
-	return Matrix3x3(Vector3::UnitX, Vector3::UnitY, Vector3(-_Transform.GetPosition()));
+	return Matrix3x3(Vector3::UnitX, Vector3::UnitY, Vector3(-_Transform.GetLocalPosition()));
 }
 
 void Camera2D::SetCameraViewSize(const ScreenPoint& size)

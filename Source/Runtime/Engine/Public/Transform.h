@@ -17,6 +17,9 @@ public:
 	float GetRotation() const { return Rotation; }
 	Matrix3x3 GetModelingMatrix() const;
 
+	
+
+
 private:
 	void CalculateLocalAxis();
 
@@ -26,5 +29,4 @@ private:
 
 	Vector2 Right = Vector2::UnitX;
 	Vector2 Up = Vector2::UnitY;
-
 };
