@@ -18,7 +18,7 @@
 
 [추가 내역]
 
-![과제](https://user-images.githubusercontent.com/43086720/83903795-bbc05380-a799-11ea-9214-a7b864c58829.gif) Transform2D Add Transform hierarchy 
+- https://www.notion.so/jeongminju/9-2079afb6f2c64840a53b8d5504ea2781Transform2D Add Transform hierarchy 구현 예시 코드 & GIF
 
 - https://www.notion.so/jeongminju/3a83946ecdb2431ba559274dcb02d663?v=b912d05bee814be091ba32c12e8f6b87 SoftRender2D.cpp Add Mesh.h, Mesh.cpp, Camera.h, Camera.cpp 구현 예시 코드 & GIF 파일
 
@@ -32,6 +32,8 @@
 
 
 [SCREENSHOT]
+ADD Transform Hierarchy
+![과제](https://user-images.githubusercontent.com/43086720/83903795-bbc05380-a799-11ea-9214-a7b864c58829.gif)
 
 ADD CAMERA & OBJECTS
 ![2](https://user-images.githubusercontent.com/43086720/82487853-e95e9900-9b19-11ea-8824-1e5b5449855d.gif)
