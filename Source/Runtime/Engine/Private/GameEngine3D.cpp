@@ -31,11 +31,13 @@ bool GameEngine3D::LoadScene()
 {
 	_Object.push_back(std::make_unique<GameObject3D>("Player", _QuadMesh["QuadMesh"].get()));
 	_Object[0]->GetTransform().SetScale(Vector3::One * 100);
+	_Object[0]->GetTransform().SetPosition(Vector3::Zero);
 	
 
 	_Camera = std::make_unique<Camera3D>();
-	Vector3 _ViewPosition = Vector3(0.f, 0.f, -500.f);
+	Vector3 _ViewPosition = Vector3(00.0f, 00.0f, -500.0f);
 	_Camera->GetTransform().SetPosition(_ViewPosition);
+	_Camera->SetLookAtRotation(_Object[0]->GetTransform().GetLocalPosition());
 	return true;
 }
 

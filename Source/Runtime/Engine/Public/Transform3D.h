@@ -7,12 +7,12 @@ public:
 public:
 	void SetPosition(const Vector3& InPosition) { _Position = InPosition; }
 	void SetScale(const Vector3& InScale) { _Scale = InScale; }
-	void SetRoation(const Rotator& InRotator) { _Rotation = InRotator; }
+	void SetRoation(const Rotator& InRotator) { _Rotation = InRotator; CalculateLocalAxis(); }
 
 	void AddPosition(const Vector3& InDeltaPosition) { _Position += InDeltaPosition; }
-	void AddYawRoation(float InDegree) { _Rotation.Yaw += InDegree; _Rotation.Clamp(); }
-	void AddRollRoation(float InDegree) { _Rotation.Roll += InDegree; _Rotation.Clamp(); }
-	void AddPitchRoation(float InDegree) { _Rotation.Pitch += InDegree; _Rotation.Clamp(); }
+	void AddYawRoation(float InDegree) { _Rotation.Yaw += InDegree; _Rotation.Clamp(); CalculateLocalAxis(); }
+	void AddRollRoation(float InDegree) { _Rotation.Roll += InDegree; _Rotation.Clamp(); CalculateLocalAxis(); }
+	void AddPitchRoation(float InDegree) { _Rotation.Pitch += InDegree; _Rotation.Clamp(); CalculateLocalAxis(); }
 	Vector3 GetLocalPosition() const { return _Position; }
 	Vector3 GetLocalScale() const {	return _Scale; }
 	Rotator GetLocalRotation() const { return _Rotation; }

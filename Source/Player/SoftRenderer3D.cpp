@@ -4,22 +4,59 @@
 // 그리드 그리기
 void SoftRenderer::DrawGrid3D()
 {
-	
+	LinearColor gridColor(LinearColor(0.8f, 0.8f, 0.8f, 0.3f));
+
+	// 뷰의 영역 계산
+	Vector2 viewPos = _GameEngine2D.GetCamera()->GetTransform().GetLocalPosition();
+	Vector2 extent = Vector2(_ScreenSize.X * 0.5f, _ScreenSize.Y * 0.5f);
+
+	// 좌측 하단에서부터 격자 그리기
+	int xGridCount = _ScreenSize.X / _Grid2DUnit;
+	int yGridCount = _ScreenSize.Y / _Grid2DUnit;
+
+	// 그리드가 시작되는 좌하단 좌표 값 계산
+	Vector2 minPos = viewPos - extent;
+	Vector2 minGridPos = Vector2(ceilf(minPos.X / (float)_Grid2DUnit), ceilf(minPos.Y / (float)_Grid2DUnit)) * (float)_Grid2DUnit;
+	ScreenPoint gridBottomLeft = ScreenPoint::ToScreenCoordinate(_ScreenSize, minGridPos - viewPos);
+
+	for (int ix = 0; ix < xGridCount; ++ix)
+	{
+		_RSI->DrawFullVerticalLine(gridBottomLeft.X + ix * _Grid2DUnit, gridColor);
+	}
+
+	for (int iy = 0; iy < yGridCount; ++iy)
+	{
+		_RSI->DrawFullHorizontalLine(gridBottomLeft.Y - iy * _Grid2DUnit, gridColor);
+	}
+
+	// 월드의 원점
+	ScreenPoint worldOrigin = ScreenPoint::ToScreenCoordinate(_ScreenSize, -viewPos);
+	_RSI->DrawFullHorizontalLine(worldOrigin.Y, LinearColor::Red);
+	_RSI->DrawFullVerticalLine(worldOrigin.X, LinearColor::Green);
 }
 
 
 // 게임 로직
 void SoftRenderer::Update3D(float InDeltaSeconds)
 {
-	
+	InputManager input = _GameEngine3D.GetInputManager();
+	Transform3D& playerTransform = _GameEngine3D.GameObjectFinder("Player")->GetTransform();
+	Transform3D& cameraTransform = _GameEngine3D.GetCamera()->GetTransform();
+
+	float deltaPosition = input.GetXAxis() * _MoveSpeed * InDeltaSeconds;
+	playerTransform.AddPitchRoation(100.0f * InDeltaSeconds);
+	playerTransform.AddYawRoation(100.0f * InDeltaSeconds);
+	playerTransform.AddRollRoation(100.0f * InDeltaSeconds);
+
+
+	_CurrentColor = input.SpacePressed() ? LinearColor::Red : LinearColor::Blue;
 }
 
 void SoftRenderer::Render3D()
 {
-	// 격자 그리기
+	
 	DrawGrid3D();
 	auto& object = _GameEngine3D.GetObject();
-	const auto& playerOjbect = _GameEngine3D.GameObjectFinder("Player");
 	Matrix4x4 viewMat = _GameEngine3D.GetCamera()->GetViewMatrix();
 	for (int i = 0; i < object.size(); i++)
 	{
