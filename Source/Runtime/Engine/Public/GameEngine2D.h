@@ -2,10 +2,10 @@
 
 #include "InputManager.h"
 #include "RectAngle.h"
-class GameEngine
+class GameEngine2D
 {
 public:
-	GameEngine() = default;
+	GameEngine2D() = default;
 
 	bool Init(const ScreenPoint& view);
 	bool LoadScene();
@@ -21,7 +21,7 @@ public:
 private:
 
 
-	std::unordered_map<std::string, std::unique_ptr<Mesh>> _QuadMesh;
+	std::unordered_map<std::string, std::unique_ptr<Mesh2D>> _QuadMesh;
 	std::unique_ptr<Camera2D> _Camera;
 	std::vector<std::unique_ptr<GameObject2D>> _Object;
 	std::unique_ptr<QuadTree> _Quadtree;

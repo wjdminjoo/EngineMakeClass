@@ -8,7 +8,7 @@ void SoftRenderer::DrawGrid2D()
 	LinearColor gridColor(LinearColor(0.8f, 0.8f, 0.8f, 0.3f));
 
 	// 뷰의 영역 계산
-	Vector2 viewPos = _GameEngine.GetCamera()->GetTransform().GetLocalPosition();
+	Vector2 viewPos = _GameEngine2D.GetCamera()->GetTransform().GetLocalPosition();
 	Vector2 extent = Vector2(_ScreenSize.X * 0.5f, _ScreenSize.Y * 0.5f);
 
 	// 좌측 하단에서부터 격자 그리기
@@ -40,11 +40,11 @@ void SoftRenderer::DrawGrid2D()
 // 게임 로직
 void SoftRenderer::Update2D(float InDeltaSeconds)
 {
-	InputManager input = _GameEngine.GetInputManager();
-	Transform2D& cameraTransform = _GameEngine.GetCamera()->GetTransform();
-	Transform2D& playerTransform = _GameEngine.GameObjectFinder("Player")->GetTransform();
-	Transform2D& childTransform = _GameEngine.GameObjectFinder("Child")->GetTransform();
-	Transform2D& childTwoTransform = _GameEngine.GameObjectFinder("ChildTwo")->GetTransform();
+	InputManager input = _GameEngine2D.GetInputManager();
+	Transform2D& cameraTransform = _GameEngine2D.GetCamera()->GetTransform();
+	Transform2D& playerTransform = _GameEngine2D.GameObjectFinder("Player")->GetTransform();
+	Transform2D& childTransform = _GameEngine2D.GameObjectFinder("Child")->GetTransform();
+	Transform2D& childTwoTransform = _GameEngine2D.GameObjectFinder("ChildTwo")->GetTransform();
 	
 	Vector2 deltaPosition = Vector2(input.GetXAxis(), input.GetYAxis()) * _MoveSpeed * InDeltaSeconds;
 
@@ -67,12 +67,12 @@ void SoftRenderer::Render2D()
 	DrawGrid2D();
 
 	////////////////////// 월드 공간 //////////////////////
-	Matrix3x3 viewMatrix = _GameEngine.GetCamera()->GetViewMatrix();
+	Matrix3x3 viewMatrix = _GameEngine2D.GetCamera()->GetViewMatrix();
 	Matrix3x3 finalMat;
-	auto& object = _GameEngine.GetObject();
-	const auto& playerOjbect = _GameEngine.GameObjectFinder("Player");
-	const auto& childObject = _GameEngine.GameObjectFinder("Child");
-	const auto& childTwoObject = _GameEngine.GameObjectFinder("ChildTwo");
+	auto& object = _GameEngine2D.GetObject();
+	const auto& playerOjbect = _GameEngine2D.GameObjectFinder("Player");
+	const auto& childObject = _GameEngine2D.GameObjectFinder("Child");
+	const auto& childTwoObject = _GameEngine2D.GameObjectFinder("ChildTwo");
 
 	//TEST 
 	// Player
@@ -134,7 +134,7 @@ void SoftRenderer::Render2D()
 	for (int i = 0; i < object.size(); i++) {
 		Transform2D& objectTransform = object[i]->GetTransform();
 
-		const Mesh* objectMesh = object[i]->GetMesh();
+		const Mesh2D* objectMesh = object[i]->GetMesh();
 
 		size_t vertexCount = objectMesh->_Vertices.size();
 		size_t indexCount = objectMesh->_Indices.size();

@@ -1,9 +1,9 @@
 #pragma once
 
-class Mesh {
+class Mesh2D {
 public:
-	Mesh(){}
-	~Mesh(){}
+	Mesh2D(){}
+	~Mesh2D(){}
 
 	void CalcuBound();
 	const Circle& GetCircleBound() const { return CircleBound; }

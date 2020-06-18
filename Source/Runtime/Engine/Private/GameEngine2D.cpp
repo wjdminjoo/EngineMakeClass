@@ -1,12 +1,11 @@
 #include "Precompiled.h"
-#include "Mesh.h"
+#include "Mesh2D.h"
 #include "Transform2D.h"
 #include "GameObject2D.h"
 #include "Camera2D.h"
-#include "Mesh.h"
-#include "GameEngine.h"
+#include "GameEngine2D.h"
 
-bool GameEngine::Init(const ScreenPoint& view)
+bool GameEngine2D::Init(const ScreenPoint& view)
 {
 	if (!_InputManager.GetXAxis || !_InputManager.GetYAxis || !_InputManager.SpacePressed)
 	{
@@ -28,7 +27,7 @@ bool GameEngine::Init(const ScreenPoint& view)
 	return true;
 }
 
-bool GameEngine::LoadScene()
+bool GameEngine2D::LoadScene()
 {
 	_Object.push_back(std::make_unique<GameObject2D>("Player", _QuadMesh["QuadMesh"].get()));
 	_Object.push_back(std::make_unique<GameObject2D>("Child", _QuadMesh["QuadMesh"].get()));
@@ -52,9 +51,9 @@ bool GameEngine::LoadScene()
 	return true;
 }
 
-bool GameEngine::LoadResource()
+bool GameEngine2D::LoadResource()
 {
-	_QuadMesh["QuadMesh"] = std::make_unique<Mesh>();
+	_QuadMesh["QuadMesh"] = std::make_unique<Mesh2D>();
 
 	static float squareHalfSize = 0.5f;
 	static int vertexCount = 4;
@@ -78,7 +77,7 @@ bool GameEngine::LoadResource()
 	return true;
 }
 
-GameObject2D* GameEngine::GameObjectFinder(std::string name)
+GameObject2D* GameEngine2D::GameObjectFinder(std::string name)
 {
 	for (int i = 0; i < _Object.size(); i++) {
 		if (name == _Object[i].get()->GetName()) {
@@ -89,7 +88,7 @@ GameObject2D* GameEngine::GameObjectFinder(std::string name)
 	return NULL;
 }
 
-void GameEngine::SetQuadTree(Rectangle& rect, std::vector<GameObject2D*> object) {
+void GameEngine2D::SetQuadTree(Rectangle& rect, std::vector<GameObject2D*> object) {
 	_Quadtree = std::make_unique<QuadTree>(rect);
 
 	Rectangle rectangle = rect;

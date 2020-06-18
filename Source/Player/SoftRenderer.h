@@ -32,7 +32,8 @@ public:
 	std::function<void(float DeltaSeconds)> UpdateFunc;
 
 	// 게임 엔진 레퍼런스
-	GameEngine& GetGameEngine() { return _GameEngine; }
+	GameEngine2D& GetGameEngine2D() { return _GameEngine2D; }
+	GameEngine3D& GetGameEngine3D() { return _GameEngine3D; }
 
 private:
 	// 기본 루프 함수
@@ -50,6 +51,12 @@ private:
 	void Update2D(float InDeltaSeconds);
 	void Render2D();
 	void DrawGrid2D();
+
+	// 3D 구현 함수
+	void Update3D(float InDeltaSeconds);
+	void Render3D();
+	void DrawGrid3D();
+
 
 	int _Grid2DUnit = 10;
 	Vector2 _StartPosition = Vector2::Zero;
@@ -82,7 +89,8 @@ private:
 	float _MoveSpeed = 100.0f;
 
 	// 게임 엔진
-	GameEngine _GameEngine;
+	GameEngine2D _GameEngine2D;
+	GameEngine3D _GameEngine3D;
 
 	//QUADTREE
 	//std::vector<GameObject2D*> quadTree;
