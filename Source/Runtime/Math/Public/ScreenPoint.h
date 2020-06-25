@@ -27,8 +27,8 @@ public:
 	FORCEINLINE ScreenPoint operator-(const ScreenPoint& InPoint) const;
 	FORCEINLINE ScreenPoint operator+(const ScreenPoint& InPoint) const;
 
-	int X = 1280;
-	int Y = 800;
+	int X = 0;
+	int Y = 0;
 };
 
 FORCEINLINE ScreenPoint ScreenPoint::operator-(const ScreenPoint& InPoint) const

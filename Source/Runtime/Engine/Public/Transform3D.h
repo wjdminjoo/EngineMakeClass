@@ -22,6 +22,8 @@ public:
 	const Vector3& GetLocalY() const { return _Up; }
 	const Vector3& GetLocalZ() const { return _Forward; }
 
+	
+
 private:
 	void CalculateLocalAxis();
 

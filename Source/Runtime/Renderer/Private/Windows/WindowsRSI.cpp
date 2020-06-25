@@ -65,6 +65,8 @@ void WindowsRSI::DrawPoint(const Vector2& InVectorPos, const LinearColor& InColo
 
 void WindowsRSI::DrawLine(const Vector2& InStartPos, const Vector2& InEndPos, const LinearColor& InColor)
 {
+
+
 	Vector2 clippedStart = InStartPos;
 	Vector2 clippedEnd = InEndPos;
 	Vector2 screenExtend = Vector2(_ScreenSize.X, _ScreenSize.Y) * 0.5f;

@@ -35,7 +35,7 @@ bool GameEngine3D::LoadScene()
 	
 
 	_Camera = std::make_unique<Camera3D>();
-	Vector3 _ViewPosition = Vector3(00.0f, 00.0f, -500.0f);
+	Vector3 _ViewPosition = Vector3(50.0f, 50.0f, -50.0f);
 	_Camera->GetTransform().SetPosition(_ViewPosition);
 	_Camera->SetLookAtRotation(_Object[0]->GetTransform().GetLocalPosition());
 	return true;
