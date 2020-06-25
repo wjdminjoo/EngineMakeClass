@@ -18,6 +18,8 @@
 
 [추가 내역]
 
+- https://www.notion.so/jeongminju/12-16d889371052422d9997460eef211a19 Add BackFace Culling, Add Projection Matrix
+
 - https://www.notion.so/jeongminju/CODE-f20ef0b554534129b13d9abfdb2b0f47 Add 3D Y-Up right Handed Coordinate
 
 - https://www.notion.so/jeongminju/9-2079afb6f2c64840a53b8d5504ea2781Transform2D Add Transform hierarchy 구현 예시 코드 & GIF
@@ -34,6 +36,10 @@
 
 
 [SCREENSHOT]
+
+Add BackFace Culling, Add Projection Matrix
+![Untitled](https://user-images.githubusercontent.com/43086720/85734426-ffbecc80-b737-11ea-8ab6-a9c070fc842b.png)
+-----------------------------------------------------------------------------------------------------------
 
 ADD 3D Y-Up right Handed Coordinate
 ![2](https://user-images.githubusercontent.com/43086720/85066314-b1ff0d00-b1e9-11ea-9338-6ce7fa60b4d1.gif)
