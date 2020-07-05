@@ -9,6 +9,9 @@ public:
 	std::vector<Vector3> _Vertices;
 	std::vector<int> _Indices;
 
+
+	Sphere GetSphereBound() const { return _SphereBound; }
+
 private:
-	
+	Sphere _SphereBound;
 };

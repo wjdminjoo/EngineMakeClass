@@ -10,6 +10,10 @@ public:
 	float GetFov() const { return FOV; }
 	float GetNearZ() const { return NearZ; }
 	float GetFarZ() const { return FarZ; }
+
+
+	bool GetViewSpaceFrustum(Sphere& sphere);
+	bool GetProjectioneFrustum(Sphere& sphere);
 private:
 	
 	Transform3D _Transform;

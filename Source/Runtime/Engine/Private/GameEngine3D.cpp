@@ -4,7 +4,7 @@
 #include "GameObject3D.h"
 #include "Camera3D.h"
 #include "GameEngine3D.h"
-
+#include <ctime>
 bool GameEngine3D::Init(const ScreenPoint& view)
 {
 	if (!_InputManager.GetXAxis || !_InputManager.GetYAxis || !_InputManager.SpacePressed)
@@ -26,13 +26,24 @@ bool GameEngine3D::Init(const ScreenPoint& view)
 
 	return true;
 }
-
+#include <random>
 bool GameEngine3D::LoadScene()
 {
 	_Object.push_back(std::make_unique<GameObject3D>("Player", _QuadMesh["QuadMesh"].get()));
 	_Object[0]->GetTransform().SetScale(Vector3::One * 100);
 	_Object[0]->GetTransform().SetPosition(Vector3::Zero);
-	
+
+	std::random_device random;
+	std::mt19937 mt(random());
+	std::uniform_real_distribution<float> dist(-500.f, 500.f);
+
+	for (int i = 0; i < 10; i++) {
+		
+		_Object.push_back(std::make_unique<GameObject3D>("Object", _QuadMesh["QuadMesh"].get()));
+		_Object[_Object.size() - 1]->GetTransform().SetScale(Vector3::One * 100);
+		_Object[_Object.size() - 1]->GetTransform().SetPosition(Vector3(dist(mt), dist(mt), dist(mt)));
+	}
+
 
 	_Camera = std::make_unique<Camera3D>();
 	Vector3 _ViewPosition = Vector3(50.0f, 50.0f, -50.0f);

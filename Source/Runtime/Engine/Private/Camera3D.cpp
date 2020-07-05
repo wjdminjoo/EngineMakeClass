@@ -46,5 +46,56 @@ Matrix4x4 Camera3D::GetProjectionMatrix(int InScreenSizeX, int InScreenSizeY) co
 		Vector4(0.f, 0.f, l, 0.f));
 }
 
+bool Camera3D::GetViewSpaceFrustum(Sphere& sphere)
+{
+	float tanHalfFov = tanf(Math::Deg2Rad(FOV * 0.5f));
+	bool inside = true;
+
+	Plane frustum[6] =
+	{
+		Plane(Vector3::UnitZ, NearZ),
+		Plane(-Vector3::UnitZ, -FarZ),
+		Plane(Vector3(-1.f, 0.f, tanHalfFov), 0.f).Normalize(),
+		Plane(Vector3(1.f, 0.f, tanHalfFov), 0.f).Normalize(),
+		Plane(Vector3(0.f, -1.f, tanHalfFov), 0.f).Normalize(),
+		Plane(Vector3(0.f, 1.f, tanHalfFov), 0.f).Normalize(),
+	};
+
+	for (int i = 0; i < 6; ++i)
+	{
+		float distance = frustum[i].Normal.Dot(sphere.Center);
+		distance -= sphere.Radius;
+		if (distance + frustum[i].InverseDistance > 0.f)
+		{
+			inside = false;
+			break;
+		}
+	}
+
+	return inside;
+}
+
+bool Camera3D::GetProjectioneFrustum(Sphere& sphere)
+{
+
+	Matrix4x4 TransposedprojMat = GetProjectionMatrix(1280, 800).Tranpose();
+
+	Vector4 center = Vector4(sphere.Center);
+	Vector4 xRad = Vector4(sphere.Radius, 0.f, 0.f, 0.f);
+	Vector4 yRad = Vector4(0.f, sphere.Radius, 0.f, 0.f);
+	Vector4 zRad = Vector4(0.f, 0.f, sphere.Radius, 0.f);
+
+	bool isLeftInside = (center + xRad).Dot(TransposedprojMat[3] + TransposedprojMat[0]) >= 0.f;
+	bool isRightInside = (center - xRad).Dot(TransposedprojMat[3] - TransposedprojMat[0]) >= 0.f;
+	bool isTopInside = (center + yRad).Dot(TransposedprojMat[3] + TransposedprojMat[1]) >= 0.f;
+	bool isBottomInside = (center - yRad).Dot(TransposedprojMat[3] - TransposedprojMat[1]) >= 0.f;
+	bool isNearInside = (center - zRad).Dot(TransposedprojMat[3] + TransposedprojMat[2]) >= 0.f;
+	bool isFarInside = (center + zRad).Dot(TransposedprojMat[3] - TransposedprojMat[2]) >= 0.f;
+
+	if (isLeftInside && isRightInside && isTopInside && isBottomInside && isNearInside && isFarInside)
+		return true;
+	return false;
+}
+
 
 

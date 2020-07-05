@@ -96,6 +96,7 @@ private:
 	//std::vector<GameObject2D*> quadTree;
 
 
+	float radius = 0.0f;
 	bool isCheckQuadTree;
 	bool first = true;
 };

@@ -7,6 +7,8 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Rotator.h"
+#include "Sphere.h"
+#include "Plane.h"
 
 #include "Matrix2x2.h"
 #include "Matrix3x3.h"

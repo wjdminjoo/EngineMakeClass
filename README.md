@@ -18,6 +18,8 @@
 
 [추가 내역]
 
+- https://www.notion.so/jeongminju/c881b429dc5e4488a45f5713849e0f59 Add Plane, Frustum Culling, sphereBound
+
 - https://www.notion.so/jeongminju/12-16d889371052422d9997460eef211a19 Add BackFace Culling, Add Projection Matrix
 
 - https://www.notion.so/jeongminju/CODE-f20ef0b554534129b13d9abfdb2b0f47 Add 3D Y-Up right Handed Coordinate
@@ -36,6 +38,9 @@
 
 
 [SCREENSHOT]
+Add Plane, Frustum Culling, sphereBound
+![GIF 2020-07-05 오후 6-52-39](https://user-images.githubusercontent.com/43086720/86534537-1de4b380-bf14-11ea-860e-693971f29ae9.gif)
+-----------------------------------------------------------------------------------------------------------
 
 Add BackFace Culling, Add Projection Matrix
 ![Untitled](https://user-images.githubusercontent.com/43086720/85734426-ffbecc80-b737-11ea-8ab6-a9c070fc842b.png)
