@@ -119,5 +119,10 @@ struct Math
 
 		return (X - intPortion);
 	}
+
+	static FORCEINLINE bool NearlyEqual(float value)
+	{
+		return fabsf(value) < 1;
+	}
 };
 

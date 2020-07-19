@@ -11,19 +11,45 @@ void SoftRenderer::DrawGrid3D()
 void SoftRenderer::Update3D(float InDeltaSeconds)
 {
 	InputManager input = _GameEngine3D.GetInputManager();
-	Transform3D& playerTransform = _GameEngine3D.GameObjectFinder("Player")->GetTransform();
 	Transform3D& cameraTransform = _GameEngine3D.GetCamera()->GetTransform();
+	auto& Body = _GameEngine3D.GameObjectFinder("Body")->GetTransform();
+	auto& LLeg = _GameEngine3D.GameObjectFinder("LLeg")->GetTransform();
+	auto& RLeg = _GameEngine3D.GameObjectFinder("RLeg")->GetTransform();
+	auto& LArm = _GameEngine3D.GameObjectFinder("LArm")->GetTransform();
+	auto& RArm = _GameEngine3D.GameObjectFinder("RArm")->GetTransform();
+	auto& Head = _GameEngine3D.GameObjectFinder("Head")->GetTransform();
 
-	float deltaPosition = input.GetXAxis() * _MoveSpeed * InDeltaSeconds;
-	//playerTransform.AddPitchRoation(100.0f * InDeltaSeconds);
-	//playerTransform.AddYawRoation(100.0f * InDeltaSeconds);
-	//playerTransform.AddRollRoation(100.0f * InDeltaSeconds);
-	cameraTransform.AddPosition(Vector3(1 * input.GetXAxis(),
-		0, cameraTransform.GetLocalZ().Z * InDeltaSeconds * 100 * input.GetYAxis()) );
+	Quaternion q1(Rotator(0, 0, 0));
+	Quaternion q2(Rotator(0, 0, -60));
+	Quaternion q3(Rotator(0, 0, 60));
+	Quaternion q4(Rotator(0, 20, 0));
+	Quaternion q5(Rotator(0, -20, 0));
+	Quaternion q6(Rotator(0, 0, -30));
+	Quaternion q7(Rotator(0, 0, 30));
+
+	if (isCheckTime)
+	{
+		time += InDeltaSeconds;
+		time2 -= InDeltaSeconds;
+		if (time >= 1.f)
+			isCheckTime = false;
+	}
+	else
+	{
+		time -= InDeltaSeconds;
+		time2 += InDeltaSeconds;
+		if (time <= 0.f)
+			isCheckTime = true;
+	}
+
+	LLeg.SetRotation(Quaternion::Slerp(q1, q6, time));
+	RLeg.SetRotation(Quaternion::Slerp(q1, q7, time));
+	RArm.SetRotation(Quaternion::Slerp(q1, q2, time));
+	LArm.SetRotation(Quaternion::Slerp(q1, q3, time));
+	Head.SetRotation(Quaternion::Slerp(q4, q5, time));
 
 	_CurrentColor = input.SpacePressed() ? LinearColor::Red : LinearColor::Blue;
 
-	radius += Math::Deg2Rad(50.f * InDeltaSeconds);
 }
 
 void SoftRenderer::Render3D()
@@ -31,22 +57,19 @@ void SoftRenderer::Render3D()
 
 	DrawGrid3D();
 	InputManager input = _GameEngine3D.GetInputManager();
-
-
 	Camera3D* cam = _GameEngine3D.GetCamera();
 	auto& object = _GameEngine3D.GetObject();
 	Matrix4x4 viewMat = _GameEngine3D.GetCamera()->GetViewMatrix();
 	Matrix4x4 projectionMat = _GameEngine3D.GetCamera()->GetProjectionMatrix(_ScreenSize.X, _ScreenSize.Y);
 
-	int viewSpaceFrustum = 0;
-	int ProjectionFrustum = 0;
+	
 	for (int i = 0; i < object.size(); i++)
 	{
 		const Mesh3D* mesh = object[i]->GetMesh();
 		Sphere sphereBound = mesh->GetSphereBound();
 		
 		Transform3D& transform = object[i]->GetTransform();
-		Matrix4x4 ProjectionfinalMat = projectionMat * viewMat * transform.GetModelingMatrix();
+		Matrix4x4 ProjectionfinalMat = projectionMat * viewMat * transform.GetWorldModelingMatrix();
 		Matrix4x4 finalMat = viewMat * transform.GetModelingMatrix();
 
 		sphereBound.Center = finalMat * sphereBound.Center;
@@ -54,16 +77,13 @@ void SoftRenderer::Render3D()
 
 		if(input.SpacePressed())
 		if (!cam->GetViewSpaceFrustum(sphereBound)) {
-			viewSpaceFrustum++;
-			continue;
-		}
-		if (!input.SpacePressed())
-		if (!cam->GetProjectioneFrustum(sphereBound)) {
-			ProjectionFrustum++;
 			continue;
 		}
 
-		
+		if (!input.SpacePressed())
+		if (!cam->GetProjectioneFrustum(sphereBound)) {
+			continue;
+		}
 
 		size_t vertexCount = mesh->_Vertices.size();
 		size_t indexCount = mesh->_Indices.size();
@@ -78,9 +98,7 @@ void SoftRenderer::Render3D()
 		{
 			vertices[vi] = Vector4(mesh->_Vertices[vi], true);
 			vertices[vi] = finalMat * vertices[vi];
-
 		}
-
 
 		// r * cos + (1 - cos) * (r * n) * (n) + sin * (n x r)
 		Vector3 n = Vector3(5.f, 10.f, 15.f).Normalize();
@@ -92,8 +110,6 @@ void SoftRenderer::Render3D()
 
 			vertices[i].W = 1.f;
 		}
-
-		
 
 		// 변환된 정점을 잇는 선 그리기
 		for (int ti = 0; ti < triangleCount; ++ti)
@@ -130,9 +146,6 @@ void SoftRenderer::Render3D()
 			_RSI->DrawLine(vertices[indices[bi + 1]].ToVector2(), vertices[indices[bi + 2]].ToVector2(), LinearColor::Blue);
 
 		}
-
-
-
 		delete[] vertices;
 		delete[] indices;
 	}

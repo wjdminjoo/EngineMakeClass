@@ -6,15 +6,6 @@ public:
 	Transform2D() = default;
 
 public:
-	/*void SetPosition(const Vector2& InPosition) { _Position = InPosition; }
-	void AddPosition(const Vector2& InDeltaPosition) { _Position += InDeltaPosition; }
-	void SetScale(const Vector2& InScale) { _Scale = InScale; }
-	void SetRotation(float InDegree) { _Rotation = InDegree; CalculateLocalAxis(); }
-	void AddRotation(float InDegree) { _Rotation += InDegree; CalculateLocalAxis(); }*/
-	//Vector2 GetPosition() const { return _Position; }
-	//Vector2 GetScale() const { return _Scale; }
-	//float GetRotation() const { return _Rotation; }
-	
 	Matrix3x3 GetModelingMatrix() const;
 	Matrix3x3 GetInvWorldModelingMatrix() const;
 	Matrix3x3 GetWorldModelingMatrix() const;

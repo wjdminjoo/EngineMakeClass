@@ -99,4 +99,8 @@ private:
 	float radius = 0.0f;
 	bool isCheckQuadTree;
 	bool first = true;
+	bool isCheckTime = true;
+	float time = 0.0f;
+	float time2 = 1.0f;
+	
 };
