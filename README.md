@@ -40,7 +40,7 @@
 
 [SCREENSHOT]
 Add Quaternion, 3D Hierarchy
-![GIF 2020-07-19 오후 10-39-13](https://user-images.githubusercontent.com/43086720/87876119-d3356200-ca10-11ea-9c9f-0d6f705769d2.gif)
+![GIF 2020-07-19 오후 10-39-13](https://user-images.githubusercontent.com/43086720/87876258-d41ac380-ca11-11ea-97f9-240aae35edf7.gif)
 -----------------------------------------------------------------------------------------------------------
 
 Add Plane, Frustum Culling, sphereBound
